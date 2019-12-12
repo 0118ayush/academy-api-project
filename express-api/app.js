@@ -8,6 +8,12 @@ const PORT = 5000;
 //app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
+const setID = () => {
+  db.length();
+};
+
+
 // get all cars
 app.get("/cars", (req, res) => {
   res.status(200).send({
@@ -16,7 +22,14 @@ app.get("/cars", (req, res) => {
 });
 
 app.post("/cars", (req, res) => {
-  db.push(req.body);
+  var id = db.length()
+  var make = req.body.make;
+  var model = req.body.model;
+  var colour = req.body.colour;
+  var year = req.body.year;
+  var id = {id: id, make: make, model: model, colour: colour, year: year};
+
+  db.push(id);
   res.status(200).send();
 });
 
