@@ -7,22 +7,23 @@ const {
   getAllCars,
   getSingleCar,
   createNewCar,
+  updateCar,
   deleteCar
 } = require("./requestLogics.js/requestLogic");
 
 app.use(bodyParser.json());
 
-function setID() {
-  for (const num of db) {
-    console.log(num.id);
-    let nextid = num.id + 1;
-    console.log(nextid);
-    if (nextid - num != 1) {
-      console.log(nextid);
-      return nextid - num;
-    }
-  }
-}
+// function setID() {
+//   for (const num of db) {
+//     console.log(num.id);
+//     let nextid = num.id + 1;
+//     console.log(nextid);
+//     if (nextid - num != 1) {
+//       console.log(nextid);
+//       return nextid - num;
+//     }
+//   }
+// }
 
 // get all cars
 app.get("/cars", (req, res) => {
@@ -42,12 +43,26 @@ app.post("/cars", (req, res) => {
   let newCar = {
     id: db.length + 1,
     make: req.body.make,
-    model: req.body.make,
+    model: req.body.model,
     colour: req.body.colour,
     year: req.body.year
   };
   var madeNewCar = createNewCar(newCar);
   res.status(200).send(madeNewCar);
+});
+
+// update car
+app.put("/cars/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+
+  let make = req.body.make;
+  let model = req.body.model;
+  let colour = req.body.colour;
+  let year = req.body.year;
+
+  let updatedCar = updateCar(id, make, model, colour, year);
+
+  res.status(201).send({ updatedCar });
 });
 
 // delete request
