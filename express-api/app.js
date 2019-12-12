@@ -1,11 +1,15 @@
 const express = require("express");
-const db = require("./db/db");
 const bodyParser = require("body-parser");
 const app = express();
 const PORT = 5000;
 
+import {
+  getAllCars,
+  getSingleCar,
+  createNewCar,
+  deleteCar
+} from "./requestLogics.js/requestLogic";
 
-//app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
@@ -25,36 +29,22 @@ function setID() {
 
 // get all cars
 app.get("/cars", (req, res) => {
-  res.status(200).send({
-    cars: db
-  });
+  getAllCars(req, res);
 });
 
-app.post("/cars", (req, res) => {
-  var id = setID;
-  var make = req.body.make;
-  var model = req.body.model;
-  var colour = req.body.colour;
-  var year = req.body.year;
-  var nextObj = {id: id, make: make, model: model, colour: colour, year: year};
+// get single car
+app.get("/cars/:id", (req, res) => {
+  getSingleCar(req, res);
+});
 
-  db.push(nextObj);
-  res.status(200).send();
+// create new car
+app.post("/cars", (req, res) => {
+  createNewCar(req, res);
 });
 
 // delete request
 app.delete("/cars/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-
-  db.map((car, index) => {
-    if (car.id === id) {
-      db.splice(index, 1);
-      return res.status(200).send({
-        success: "true",
-        message: "Car deleted successfuly"
-      });
-    }
-  });
+  deleteCar(req, res);
 });
 
 app.listen(PORT, () => {
