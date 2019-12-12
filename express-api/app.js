@@ -52,7 +52,7 @@ app.post("/cars", (req, res) => {
   res.status(200).send(madeNewCar);
 });
 
-// update car
+// update cars
 app.put("/cars/:id", (req, res) => {
   const id = parseInt(req.params.id);
 
