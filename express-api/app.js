@@ -12,14 +12,22 @@ const {
 
 app.use(bodyParser.json());
 
+
 function setID() {
+  let idArray = [];
   for (const num of db) {
-    console.log(num.id);
-    let nextid = num.id + 1;
-    console.log(nextid);
-    if (nextid - num != 1) {
-      console.log(nextid);
-      return nextid - num;
+    idArray.push(num.id);
+  }
+  idArray.sort();
+  console.log(idArray);
+  for (let i = 0; i < idArray.length; i++) {
+    if((idArray[i+1] - idArray[i]) != 1) {
+      let newID = idArray[i] + 1;
+      return newID;
+    }
+    if(i == idArray.length) {
+      let newID = idArray[i] + 1;
+      return newID
     }
   }
 }
@@ -39,10 +47,11 @@ app.get("/cars/:id", (req, res) => {
 
 // create new car
 app.post("/cars", (req, res) => {
+  var newID = setID()
   let newCar = {
-    id: db.length + 1,
+    id: newID,
     make: req.body.make,
-    model: req.body.make,
+    model: req.body.model,
     colour: req.body.colour,
     year: req.body.year
   };
