@@ -10,4 +10,4 @@ const cars = [
   }
 ];
 
-module.exports.db = cars;
+module.exports = cars;

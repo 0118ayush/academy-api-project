@@ -1,16 +1,14 @@
 const express = require("express");
 const db = require("./db/db");
 const app = express();
+const PORT = 5000;
 
-// get all todos
+// get all cars
 app.get("/cars", (req, res) => {
   res.status(200).send({
-    success: "true",
-    message: "cars retrieved successfully",
     cars: db
   });
 });
-const PORT = 5000;
 
 app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);
