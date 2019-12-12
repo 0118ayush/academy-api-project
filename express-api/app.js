@@ -13,7 +13,6 @@ app.get("/cars", (req, res) => {
   });
 });
 
-
 // get single car
 app.get("/cars/:id", (req, res) => {
   const id = parseInt(req.params.id);
@@ -38,7 +37,6 @@ app.post("/cars", (req, res) => {
 
   db.push(newObj);
   res.send(req.body);
-
 });
 
 // delete request
