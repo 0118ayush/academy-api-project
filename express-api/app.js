@@ -3,21 +3,9 @@ const db = require("./db/db");
 const bodyParser = require("body-parser");
 const app = express();
 const PORT = 5000;
-const bodyParser = require("body-parser");
 
-
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-const sendData = {
-  id: 2,
-  make: "Tesla",
-  model: "ES",
-  colour: "blue",
-  year: 2018
-}
-
-
 
 // get all cars
 app.get("/cars", (req, res) => {
@@ -26,11 +14,28 @@ app.get("/cars", (req, res) => {
   });
 });
 
+// get s(ingle car
+// app.get("/cars/:id", (req, res) => {
+//     res.status(200).send({
+//         singleCar
+//     })
+// })
 
+// create new car
 app.post("/cars", (req, res) => {
   console.log(req.body);
-  //db.push(sendData);
-  res.status(200).send();
+
+  let newObj = {
+    id: db.length + 1,
+    make: req.body.make,
+    model: req.body.make,
+    colour: req.body.colour,
+    year: req.body.year
+  };
+
+  db.push(newObj);
+  res.send(req.body);
+});
 
 // delete request
 app.delete("/cars/:id", (req, res) => {
@@ -45,7 +50,6 @@ app.delete("/cars/:id", (req, res) => {
       });
     }
   });
-
 });
 
 app.listen(PORT, () => {
