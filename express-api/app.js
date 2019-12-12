@@ -12,6 +12,21 @@ import {
 
 app.use(bodyParser.json());
 
+
+function setID() {
+  for (const num of db) {
+    console.log(num.id);
+    let nextid = num.id + 1;
+    console.log(nextid);
+    if (nextid - num != 1)
+    {
+      console.log(nextid);
+      return nextid - num;
+    } 
+  } 
+}
+
+
 // get all cars
 app.get("/cars", (req, res) => {
   getAllCars(req, res);
