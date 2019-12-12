@@ -9,9 +9,18 @@ const PORT = 5000;
 app.use(bodyParser.json());
 
 
-const setID = () => {
-  db.length();
-};
+function setID() {
+  for (const num of db) {
+    console.log(num.id);
+    let nextid = num.id + 1;
+    console.log(nextid);
+    if (nextid - num != 1)
+    {
+      console.log(nextid);
+      return nextid - num;
+    } 
+  } 
+}
 
 
 // get all cars
@@ -22,14 +31,14 @@ app.get("/cars", (req, res) => {
 });
 
 app.post("/cars", (req, res) => {
-  var id = db.length()
+  var id = setID;
   var make = req.body.make;
   var model = req.body.model;
   var colour = req.body.colour;
   var year = req.body.year;
-  var id = {id: id, make: make, model: model, colour: colour, year: year};
+  var nextObj = {id: id, make: make, model: model, colour: colour, year: year};
 
-  db.push(id);
+  db.push(nextObj);
   res.status(200).send();
 });
 
