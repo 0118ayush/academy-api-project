@@ -2,18 +2,18 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const PORT = 5000;
-import db from "./db/db";
-
-import {
+const db = require("./db/db");
+const {
   getAllCars,
   getSingleCar,
   createNewCar,
   deleteCar
-} from "./requestLogics.js/requestLogic";
+} = require("./requestLogics.js/requestLogic");
 
 app.use(bodyParser.json());
 
-function setID2() {
+
+function setID() {
   let idArray = [];
   for (const num of db) {
     idArray.push(num.id);
@@ -47,7 +47,7 @@ app.get("/cars/:id", (req, res) => {
 
 // create new car
 app.post("/cars", (req, res) => {
-  var newID = setID2()
+  var newID = setID()
   let newCar = {
     id: newID,
     make: req.body.make,
