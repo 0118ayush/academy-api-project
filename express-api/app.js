@@ -14,12 +14,15 @@ app.get("/cars", (req, res) => {
   });
 });
 
-// get s(ingle car
-// app.get("/cars/:id", (req, res) => {
-//     res.status(200).send({
-//         singleCar
-//     })
-// })
+// get single car
+app.get("/cars/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+
+  let singleCar = db.filter(car => car.id === id);
+  return res.status(200).send({
+    car: singleCar
+  });
+});
 
 // create new car
 app.post("/cars", (req, res) => {
