@@ -1,4 +1,4 @@
-# academy-api-project
+# Academy-API-Project
 
 Cars API
 Please create a new git repo (don't fork this one) and follow the instructions below.
