@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const app = express();
 const PORT = 5000;
 
-// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // get all cars
@@ -13,6 +12,7 @@ app.get("/cars", (req, res) => {
     cars: db
   });
 });
+
 
 // get single car
 app.get("/cars/:id", (req, res) => {
@@ -38,6 +38,7 @@ app.post("/cars", (req, res) => {
 
   db.push(newObj);
   res.send(req.body);
+
 });
 
 // delete request
