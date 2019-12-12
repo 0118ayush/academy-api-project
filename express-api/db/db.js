@@ -16,7 +16,7 @@ const cars = [
     year: 2009
   },
   {
-    id: 4,
+    id: 2,
     make: "VW",
     model: "Beetle",
     colour: "blue",
