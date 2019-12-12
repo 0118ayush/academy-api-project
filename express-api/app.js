@@ -13,7 +13,6 @@ const {
 
 app.use(bodyParser.json());
 
-<<<<<<< HEAD
 // function setID() {
 //   for (const num of db) {
 //     console.log(num.id);
@@ -41,7 +40,7 @@ app.get("/cars/:id", (req, res) => {
 
 // create new car
 app.post("/cars", (req, res) => {
-  var newID = setID()
+  var newID = setID();
   let newCar = {
     id: newID,
     make: req.body.make,
