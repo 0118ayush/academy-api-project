@@ -10,6 +10,12 @@ app.get("/cars", (req, res) => {
   });
 });
 
+// delete request
+app.delete("/cars/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  console.log(id);
+});
+
 app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);
 });
