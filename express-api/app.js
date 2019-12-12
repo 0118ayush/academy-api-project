@@ -3,10 +3,21 @@ const db = require("./db/db");
 const bodyParser = require("body-parser");
 const app = express();
 const PORT = 5000;
+const bodyParser = require("body-parser");
 
-//Parse incoming requests
-app.use(bodyParser.json());
+
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+const sendData = {
+  id: 2,
+  make: "Tesla",
+  model: "ES",
+  colour: "blue",
+  year: 2018
+}
+
+
 
 // get all cars
 app.get("/cars", (req, res) => {
@@ -14,6 +25,12 @@ app.get("/cars", (req, res) => {
     cars: db
   });
 });
+
+
+app.post("/cars", (req, res) => {
+  console.log(req.body);
+  //db.push(sendData);
+  res.status(200).send();
 
 // delete request
 app.delete("/cars/:id", (req, res) => {
@@ -28,6 +45,7 @@ app.delete("/cars/:id", (req, res) => {
       });
     }
   });
+
 });
 
 app.listen(PORT, () => {
