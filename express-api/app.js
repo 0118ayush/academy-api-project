@@ -2,31 +2,27 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const PORT = 5000;
-import db from "./db/db";
-
-import {
+const db = require("./db/db");
+const {
   getAllCars,
   getSingleCar,
   createNewCar,
   deleteCar
-} from "./requestLogics.js/requestLogic";
+} = require("./requestLogics.js/requestLogic");
 
 app.use(bodyParser.json());
-
 
 function setID() {
   for (const num of db) {
     console.log(num.id);
     let nextid = num.id + 1;
     console.log(nextid);
-    if (nextid - num != 1)
-    {
+    if (nextid - num != 1) {
       console.log(nextid);
       return nextid - num;
-    } 
-  } 
+    }
+  }
 }
-
 
 // get all cars
 app.get("/cars", (req, res) => {
