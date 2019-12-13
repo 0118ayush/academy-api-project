@@ -2,7 +2,7 @@ const db = require("../db/db");
 
 class CarService {
   constructor(dataBase) {
-    this.idCounter = 0;
+    
     this.database = dataBase;
   }
 
@@ -15,17 +15,10 @@ class CarService {
     return { car: singleCar };
   };
 
-  createNewCar = (id, reqData) => {
+  createNewCar = (newCar) => {
     //newCar.id = this.database.get
-    let newCar = {
-      id: id,
-      make: reqData.make,
-      model: reqData.model,
-      colour: reqData.colour,
-      year: reqData.year
-    };
-    this.database.listCars().push(newCar);
-    return newCar;
+    let createdCar = this.database.createCar(newCar);
+    return createdCar;
   };
 
   updateCar = (id, make, model, colour, year) => {
