@@ -1,22 +1,6 @@
 class InMemoryDatabase {
   constructor() {
-
-    this.cars = [
-      {
-        id: 1,
-        make: "Audi",
-        model: "A4",
-        colour: "red",
-        year: 2013
-      },
-      {
-        id: 3,
-        make: "Mercedes",
-        model: "A-Class",
-        colour: "white",
-        year: 2009
-      }
-    ];
+    this.cars = [];
 
     this.idCounter = 0;
   }
@@ -30,7 +14,7 @@ class InMemoryDatabase {
   }
 
   createCar(data) {
-    let newId = ++this.idCounter
+    let newId = ++this.idCounter;
     let newCar = {
       id: newId,
       make: data.make,

@@ -2,12 +2,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const PORT = 5000;
-const db = require("./db/db");
 
 const cs = require("./services/carService");
-
-const im = require("./databases/inMemory");
-
+const imd = require("./databases/inMemory");
 
 const inMemory = new imd();
 const carService = new cs(inMemory);
