@@ -37,8 +37,19 @@ class CarService {
   };
 
   createNewCar = newCar => {
-    let createdCar = this.database.createCar(newCar);
-    return createdCar;
+    let check = this.database.dataCheck(newCar);
+    if (check == true) {
+      try {
+        let createdCar = this.database.createCar(newCar);
+        createdCar.message = "Car created successfuly!";
+        return createdCar;
+      }
+      catch (error) {
+        return { message: "Failed to create car.", error: error.message };
+      }
+    } else {
+      return { message: check };
+    }
   };
 
   deleteCar = id => {

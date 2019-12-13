@@ -13,7 +13,15 @@ class InMemoryDatabase {
     return this.cars.length;
   }
 
+  dataCheck(data) {
+    if(!data.make) {
+      return "Make feild is required!";
+    }
+    return true;
+  }
+
   createCar(data) {
+    
     let newId = ++this.idCounter;
     let newCar = {
       id: newId,
