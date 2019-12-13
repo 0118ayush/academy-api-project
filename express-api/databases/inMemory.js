@@ -17,6 +17,15 @@ class InMemoryDatabase {
     if(!data.make) {
       return "Make feild is required!";
     }
+    if(!data.model) {
+      return "Model feild is required!";
+    }
+    if(!data.colour) {
+      return "Colour feild is required!";
+    }
+    if(!data.year) {
+      return "Year feild is required!";
+    }
     return true;
   }
 
