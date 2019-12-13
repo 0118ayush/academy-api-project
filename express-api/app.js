@@ -26,7 +26,6 @@ app.get("/cars/:id", (req, res) => {
 
 // create new car
 app.post("/cars", (req, res) => {
-  //let newID = inMemory.getNewID();
   let madeNewCar = carService.createNewCar(req.body);
 
   res.status(200).send(madeNewCar);
