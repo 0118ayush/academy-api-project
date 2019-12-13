@@ -16,7 +16,6 @@ class CarService {
   };
 
 
-
   updateCar = (id, reqData) => {
     let chosenCar;
     let itemIndex;
