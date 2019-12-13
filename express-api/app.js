@@ -4,7 +4,7 @@ const app = express();
 const PORT = 5000;
 const db = require("./db/db");
 
-const cs = require("./services/requestLogic");
+const cs = require("./services/carService");
 const im = require("./databases/inMemory");
 
 app.use(bodyParser.json());
@@ -39,15 +39,9 @@ app.get("/cars/:id", (req, res) => {
 
 // create new car
 app.post("/cars", (req, res) => {
-  var newID = setID();
-  let newCar = {
-    id: db.length + 1,
-    make: req.body.make,
-    model: req.body.model,
-    colour: req.body.colour,
-    year: req.body.year
-  };
-  var madeNewCar = createNewCar(newCar);
+  let newID = inMemory.getNewID();
+  //let reqData = req.body;
+  let madeNewCar = carService.createNewCar(newID, req.body);
   res.status(200).send(madeNewCar);
 });
 

@@ -15,9 +15,16 @@ class CarService {
     return { car: singleCar };
   };
 
-  createNewCar = newCar => {
-    newCar.id = ++this.idCounter;
-    db.push(newCar);
+  createNewCar = (id, reqData) => {
+    //newCar.id = this.database.get
+    let newCar = {
+      id: id,
+      make: reqData.make,
+      model: reqData.model,
+      colour: reqData.colour,
+      year: reqData.year
+    };
+    this.database.listCars().push(newCar);
     return newCar;
   };
 

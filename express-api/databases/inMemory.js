@@ -6,4 +6,10 @@ class InMemoryDatabase {
   listCars() {
     return this.cars;
   }
+
+  getNewID() {
+    return this.cars.length;
+  }
 }
+
+module.exports = InMemoryDatabase;
