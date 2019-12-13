@@ -3,31 +3,30 @@ const bodyParser = require("body-parser");
 const app = express();
 const PORT = 5000;
 const db = require("./db/db");
-const {
-  getAllCars,
-  getSingleCar,
-  createNewCar,
-  updateCar,
-  deleteCar
-} = require("./requestLogics.js/requestLogic");
+
+const cs = require("./services/requestLogic");
+const im = require("./databases/inMemory");
 
 app.use(bodyParser.json());
 
-// function setID() {
-//   for (const num of db) {
-//     console.log(num.id);
-//     let nextid = num.id + 1;
-//     console.log(nextid);
-//     if (nextid - num != 1) {
-//       console.log(nextid);
-//       return nextid - num;
-//     }
-//   }
-// }
+const inMemory = new im();
+const carService = new cs(inMemory);
+
+newCar = function setID() {
+  for (const num of db) {
+    console.log(num.id);
+    let nextid = num.id + 1;
+    console.log(nextid);
+    if (nextid - num != 1) {
+      console.log(nextid);
+      return nextid - num;
+    }
+  }
+};
 
 // get all cars
 app.get("/cars", (req, res) => {
-  const result = getAllCars();
+  const result = carService.getAllCars();
   res.send(result);
 });
 
@@ -42,7 +41,7 @@ app.get("/cars/:id", (req, res) => {
 app.post("/cars", (req, res) => {
   var newID = setID();
   let newCar = {
-    id: newID,
+    id: db.length + 1,
     make: req.body.make,
     model: req.body.model,
     colour: req.body.colour,
