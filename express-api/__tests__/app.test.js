@@ -4,7 +4,7 @@ const {
   getSingleCar,
   createNewCar,
   deleteCar
-} = require("../requestLogics.js/requestLogic");
+} = require("../services/carService");
 
 it("retrieves list of cars from get call", () => {
   expect(getAllCars());

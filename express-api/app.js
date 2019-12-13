@@ -4,49 +4,31 @@ const app = express();
 const PORT = 5000;
 const db = require("./db/db");
 
-const cs = require("./services/requestLogic");
-const im = require("./databases/inMemory");
+const cs = require("./services/carService");
+const imd = require("./databases/inMemory");
+
+const inMemory = new imd();
+const carService = new cs(inMemory);
 
 app.use(bodyParser.json());
 
-const inMemory = new im();
-const carService = new cs(inMemory);
-
-newCar = function setID() {
-  for (const num of db) {
-    console.log(num.id);
-    let nextid = num.id + 1;
-    console.log(nextid);
-    if (nextid - num != 1) {
-      console.log(nextid);
-      return nextid - num;
-    }
-  }
-};
-
 // get all cars
 app.get("/cars", (req, res) => {
-  const result = carService.getAllCars();
-  res.send(result);
+  const allCars = carService.getAllCars();
+  res.send(allCars);
 });
 
 // get single car
 app.get("/cars/:id", (req, res) => {
   const id = parseInt(req.params.id);
-  let singleCar = getSingleCar(id);
+  let singleCar = carService.getSingleCar(id);
   res.status(200).send(singleCar);
 });
 
 // create new car
 app.post("/cars", (req, res) => {
   var newID = setID();
-  let newCar = {
-    id: db.length + 1,
-    make: req.body.make,
-    model: req.body.model,
-    colour: req.body.colour,
-    year: req.body.year
-  };
+  let reqInfo = req.body;
   var madeNewCar = createNewCar(newCar);
   res.status(200).send(madeNewCar);
 });
@@ -55,12 +37,9 @@ app.post("/cars", (req, res) => {
 app.put("/cars/:id", (req, res) => {
   const id = parseInt(req.params.id);
 
-  let make = req.body.make;
-  let model = req.body.model;
-  let colour = req.body.colour;
-  let year = req.body.year;
+  // const reqData = ;
 
-  let updatedCar = updateCar(id, make, model, colour, year);
+  let updatedCar = carService.updateCar(id, req.body);
 
   res.status(201).send({ updatedCar });
 });

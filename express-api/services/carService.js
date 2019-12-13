@@ -1,18 +1,15 @@
-const db = require("../db/db");
-
 class CarService {
   constructor(dataBase) {
-    this.idCounter = 0;
     this.database = dataBase;
   }
 
   getAllCars = () => {
-    return { cars: this.database.listCars() };
+    return this.database.listCars();
   };
 
   getSingleCar = id => {
-    let singleCar = db.filter(car => car.id === id);
-    return { car: singleCar };
+    let singleCar = this.database.listCars().filter(car => car.id === id);
+    return singleCar;
   };
 
   createNewCar = newCar => {
@@ -21,11 +18,11 @@ class CarService {
     return newCar;
   };
 
-  updateCar = (id, make, model, colour, year) => {
+  updateCar = (id, reqData) => {
     let chosenCar;
     let itemIndex;
 
-    db.map((car, index) => {
+    this.database.listCars().map((car, index) => {
       if (car.id === id) {
         chosenCar = car;
         itemIndex = index;
@@ -34,13 +31,13 @@ class CarService {
 
     const updatedCar = {
       id: chosenCar.id,
-      make: make || chosenCar.make,
-      model: model || chosenCar.model,
-      colour: colour || chosenCar.colour,
-      year: year || chosenCar.year
+      make: reqData.make || chosenCar.make,
+      model: reqData.model || chosenCar.model,
+      colour: reqData.colour || chosenCar.colour,
+      year: reqData.year || chosenCar.year
     };
 
-    db.splice(itemIndex, 1, updatedCar);
+    this.database.listCars().splice(itemIndex, 1, updatedCar);
 
     return updatedCar;
   };
