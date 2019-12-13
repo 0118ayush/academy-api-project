@@ -24,6 +24,14 @@ class InMemoryDatabase {
     this.cars.push(newCar);
     return newCar;
   }
+
+  removeCar(id) {
+    this.cars.map((car, index) => {
+      if (car.id === id) {
+        this.cars.splice(index, 1);
+      }
+    });
+  }
 }
 
 module.exports = InMemoryDatabase;

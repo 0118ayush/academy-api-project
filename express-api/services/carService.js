@@ -46,11 +46,13 @@ class CarService {
   };
 
   deleteCar = id => {
-    db.map((car, index) => {
+    this.database.removeCar(id);
+    
+    /*db.map((car, index) => {
       if (car.id === id) {
         db.splice(index, 1);
       }
-    });
+    });*/
     return { message: "Car deleted successfuly" };
   };
 }

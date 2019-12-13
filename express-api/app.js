@@ -61,7 +61,7 @@ app.put("/cars/:id", (req, res) => {
 // delete request
 app.delete("/cars/:id", (req, res) => {
   const id = parseInt(req.params.id);
-  let deleteMessage = deleteCar(id);
+  let deleteMessage = carService.deleteCar(id);
   res.status(200).send(deleteMessage);
 });
 
