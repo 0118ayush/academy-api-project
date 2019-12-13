@@ -5,7 +5,9 @@ const PORT = 5000;
 const db = require("./db/db");
 
 const cs = require("./services/carService");
-const imd = require("./databases/inMemory");
+
+const im = require("./databases/inMemory");
+
 
 const inMemory = new imd();
 const carService = new cs(inMemory);
@@ -27,9 +29,9 @@ app.get("/cars/:id", (req, res) => {
 
 // create new car
 app.post("/cars", (req, res) => {
-  var newID = setID();
-  let reqInfo = req.body;
-  var madeNewCar = createNewCar(newCar);
+  //let newID = inMemory.getNewID();
+  let madeNewCar = carService.createNewCar(req.body);
+
   res.status(200).send(madeNewCar);
 });
 
