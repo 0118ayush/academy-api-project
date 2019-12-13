@@ -41,8 +41,8 @@ class CarService {
     if (check == true) {
       try {
         let createdCar = this.database.createCar(newCar);
-        createdCar.message = "Car created successfuly!";
-        return createdCar;
+        let sendCar = {createdCar, message: "Car created successfuly!"};
+        return sendCar;
       }
       catch (error) {
         return { message: "Failed to create car.", error: error.message };

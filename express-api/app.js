@@ -27,18 +27,13 @@ app.get("/cars/:id", (req, res) => {
 // create new car
 app.post("/cars", (req, res) => {
   let madeNewCar = carService.createNewCar(req.body);
-
   res.status(200).send(madeNewCar);
 });
 
 // update car
 app.put("/cars/:id", (req, res) => {
   const id = parseInt(req.params.id);
-
-  // const reqData = ;
-
   let updatedCar = carService.updateCar(id, req.body);
-
   res.status(201).send({ updatedCar });
 });
 

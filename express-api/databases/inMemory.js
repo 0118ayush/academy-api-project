@@ -1,7 +1,6 @@
 class InMemoryDatabase {
   constructor() {
     this.cars = [];
-
     this.idCounter = 0;
   }
 
